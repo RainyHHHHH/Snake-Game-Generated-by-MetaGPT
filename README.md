@@ -9,6 +9,29 @@ metagpt "生成一个贪吃蛇游戏"
 * 生成了所需依赖列表requirements.txt，直接使用**pip install -r requirements.txt**即可安装所需库。
 * 代码包含了完整的游戏循环、事件处理和图形渲染。
 * 注释清晰，便于理解和后续维护。
+## MetaGPT角色分工
+```bash
+# 角色执行序列
+1. Alice (Product Manager)
+   📍 状态: 等待 UserRequirement
+   ✅ 职责: 接收用户原始需求，编写产品需求文档(PRD)
+
+2. Bob (Architect)  
+   📍 状态: 等待 WritePRD
+   ✅ 职责: 等待 Alice 完成 PRD 后，进行技术架构设计
+
+3. Eve (Project Manager)
+   📍 状态: 等待 WriteDesign
+   ✅ 职责: 等待 Bob 完成技术设计后，进行任务拆分
+
+4. Alex (Engineer)
+   📍 状态: 等待 WriteTasks
+   ✅ 职责: 等待 Eve 完成任务拆分后，编写具体代码
+
+5. Edward (QA Engineer)
+   📍 状态: 等待 RunCode 或 SummarizeCode
+   ✅ 职责: 等待 Alex 完成代码编写后，进行质量检测
+```
 ## 效果展示
 <img width="966" height="803" alt="image" src="https://github.com/user-attachments/assets/3ef590bc-255a-4506-a805-8bcc4317f5bb" />
 <img width="990" height="762" alt="image" src="https://github.com/user-attachments/assets/846b4f65-e81a-40b0-a90f-1383df6f509b" />
