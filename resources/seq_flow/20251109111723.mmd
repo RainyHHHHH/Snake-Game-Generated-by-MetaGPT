@@ -1,0 +1,48 @@
+
+sequenceDiagram
+    participant M as Main
+    participant G as Game
+    participant S as Snake
+    participant F as Food
+    participant C as Config
+    
+    M->>G: __init__(SCREEN_WIDTH, SCREEN_HEIGHT)
+    G->>S: __init__(start_x, start_y, BLOCK_SIZE)
+    G->>F: __init__(BLOCK_SIZE)
+    G->>F: generate_new_position(SCREEN_WIDTH, SCREEN_HEIGHT)
+    
+    loop Game Loop
+        M->>G: handle_events()
+        G->>G: 处理键盘事件
+        alt 方向键按下
+            G->>S: change_direction(new_direction)
+        end
+        
+        M->>G: update()
+        G->>S: move()
+        G->>S: get_head_position()
+        G->>F: get_position()
+        alt 吃到食物
+            G->>S: grow()
+            G->>G: score += 1
+            G->>F: generate_new_position(SCREEN_WIDTH, SCREEN_HEIGHT)
+        end
+        
+        G->>S: check_collision(SCREEN_WIDTH, SCREEN_HEIGHT)
+        alt 发生碰撞
+            G->>G: game_over = True
+        end
+        
+        M->>G: draw(screen)
+        G->>S: get_body()
+        G->>S: 绘制蛇身
+        G->>F: draw(screen)
+        G->>G: 绘制分数和游戏状态
+        
+        alt 游戏结束且按R键
+            M->>G: reset_game()
+            G->>S: __init__(start_x, start_y, BLOCK_SIZE)
+            G->>F: generate_new_position(SCREEN_WIDTH, SCREEN_HEIGHT)
+            G->>G: score = 0, game_over = False
+        end
+    end

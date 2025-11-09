@@ -1,0 +1,52 @@
+
+classDiagram
+    class Game {
+        -Snake snake
+        -Food food
+        -int score
+        -bool game_over
+        -int screen_width
+        -int screen_height
+        +__init__(width: int, height: int)
+        +handle_events() None
+        +update() None
+        +draw(screen) None
+        +reset_game() None
+        +is_game_over() bool
+    }
+    class Snake {
+        -list body
+        -str direction
+        -int block_size
+        +__init__(x: int, y: int, block_size: int)
+        +move() None
+        +grow() None
+        +change_direction(new_direction: str) None
+        +check_collision(width: int, height: int) bool
+        +get_head_position() tuple
+        +get_body() list
+    }
+    class Food {
+        -int x
+        -int y
+        -int block_size
+        +__init__(block_size: int)
+        +generate_new_position(width: int, height: int) None
+        +get_position() tuple
+        +draw(screen) None
+    }
+    class Config {
+        +SCREEN_WIDTH: int = 800
+        +SCREEN_HEIGHT: int = 600
+        +BLOCK_SIZE: int = 20
+        +FPS: int = 10
+        +BACKGROUND_COLOR: tuple = (0, 0, 0)
+        +SNAKE_COLOR: tuple = (0, 255, 0)
+        +FOOD_COLOR: tuple = (255, 0, 0)
+        +TEXT_COLOR: tuple = (255, 255, 255)
+    }
+    Game --> Snake
+    Game --> Food
+    Game --> Config
+    Snake --> Config
+    Food --> Config
